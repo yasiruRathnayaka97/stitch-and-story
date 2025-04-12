@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { products, Product, getProductCategories } from '../../data/products';
@@ -10,7 +10,8 @@ import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import './products.css';
 
-export default function ProductsPage() {
+// Component that uses searchParams - will be wrapped in Suspense
+function ProductsContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
@@ -198,5 +199,22 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main component that wraps the content in Suspense
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 products-container">
+        <h1 className="products-header">Products</h1>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading products...</p>
+        </div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }
