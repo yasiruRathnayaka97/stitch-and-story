@@ -76,7 +76,7 @@ export const products: Product[] = [
     price: 119.99,
     images: [
       "/images/products/pajama-1.jpg",
-      "/images/products/pajama-1-alt.jpg",
+      "/images/products/beanie-1-alt.jpg",
     ],
     category: "Sleepwear",
     stock: 20,

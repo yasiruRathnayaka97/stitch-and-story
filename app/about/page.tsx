@@ -23,7 +23,7 @@ export default function AboutPage() {
               <div className="section-divider"></div>
               <p className="section-text-modern">
                 Stitch and Story began with a simple idea: to create beautiful, high-quality textiles that tell a story. 
-                Founded by textile enthusiasts with a passion for craftsmanship, we've grown from a small workshop 
+                Founded by textile enthusiasts with a passion for craftsmanship, we&apos;ve grown from a small workshop 
                 into a brand recognized for exceptional quality and timeless design.
               </p>
               <p className="section-text-modern">
@@ -79,7 +79,7 @@ export default function AboutPage() {
               </div>
               <h3 className="value-title-modern">Sustainability</h3>
               <p className="value-text-modern">
-                We're committed to responsible practices that minimize our environmental impact. 
+                We&apos;re committed to responsible practices that minimize our environmental impact. 
                 From sourcing sustainable materials to reducing waste, we strive to protect our planet.
               </p>
             </div>

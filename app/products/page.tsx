@@ -9,7 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useWishlist } from '../hooks/useWishlist';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import '../routes/products/products.css';
+import './products.css';
 
 // Component that uses searchParams - will be wrapped in Suspense
 function ProductsContent() {

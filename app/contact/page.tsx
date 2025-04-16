@@ -59,7 +59,7 @@ export default function ContactPage() {
       <section className="contact-hero-section">
         <div className="container mx-auto px-4 py-16 md:py-24 text-center">
           <h1 className="contact-header-modern">Contact Us</h1>
-          <p className="contact-subtitle-modern">We'd love to hear from you</p>
+          <p className="contact-subtitle-modern">We&apos;d love to hear from you</p>
         </div>
       </section>
 
@@ -80,8 +80,8 @@ export default function ContactPage() {
               <h2 className="section-title-modern">Get In Touch</h2>
               <div className="section-divider"></div>
               <p className="section-text">
-                Have questions about our products, orders, or anything else? We're here to help!
-                Fill out the form and we'll get back to you as soon as possible.
+                Have questions about our products, orders, or anything else? We&apos;re here to help!
+                Fill out the form and we&apos;ll get back to you as soon as possible.
               </p>
               
               <div className="contact-methods">

@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, Product } from '../../data/products';
+import { products} from '../../data/products';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
-import '../../routes/products/products.css';
+import '../products.css';
+import './product-detail.css';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -69,28 +70,28 @@ export default function ProductDetailPage() {
 
   return (
     <div className="product-detail-container">
-      <div className="flex items-center text-sm text-dusty-gray mb-8">
-        <Link href="/" className="hover:text-blush-nude transition-colors">
+      <div className="breadcrumb-navigation">
+        <Link href="/" className="breadcrumb-link">
           Home
         </Link>
-        <span className="mx-2">/</span>
-        <Link href="/products" className="hover:text-blush-nude transition-colors">
+        <span className="breadcrumb-separator">/</span>
+        <Link href="/products" className="breadcrumb-link">
           Products
         </Link>
-        <span className="mx-2">/</span>
+        <span className="breadcrumb-separator">/</span>
         <Link
           href={`/products?category=${product.category}`}
-          className="hover:text-blush-nude transition-colors"
+          className="breadcrumb-link"
         >
           {product.category}
         </Link>
-        <span className="mx-2">/</span>
-        <span className="text-charcoal-black">{product.name}</span>
+        <span className="breadcrumb-separator">/</span>
+        <span className="breadcrumb-current">{product.name}</span>
       </div>
 
       <button
         onClick={() => router.back()}
-        className="flex items-center text-dusty-gray hover:text-charcoal-black transition-colors mb-6"
+        className="back-button"
       >
         ← Back
       </button>
@@ -224,9 +225,9 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Product Details */}
-      <div className="border-t border-dusty-gray/20 pt-6 mt-12">
-        <h2 className="text-xl font-semibold mb-4">Product Details</h2>
-        <ul className="space-y-2 text-dusty-gray">
+      <div className="product-details-section">
+        <h2 className="product-details-title">Product Details</h2>
+        <ul className="product-details-list">
           <li>Premium quality materials</li>
           <li>Ethically sourced and produced</li>
           <li>Machine washable (see care instructions)</li>
