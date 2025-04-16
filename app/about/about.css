@@ -1,0 +1,257 @@
+/* About Page Specific Styles - Modern Design */
+
+:root {
+  --primary-color: #2E2E2E;    /* Charcoal black */
+  --secondary-color: #F0DADA;  /* Blush nude */
+  --text-color: #2E2E2E;       /* Charcoal black for text */
+  --light-color: #FDFDFD;      /* Soft white */
+  --accent-color: #A6A6A6;     /* Dusty gray */
+  --bg-color: #F8F8F8;         /* Very light gray background */
+  --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  --hover-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Modern Page Container */
+.about-container-modern {
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* Modern Hero Section */
+.about-hero-section {
+  background-color: #f8f8f8;
+  padding: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-header-modern {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #2E2E2E;
+  text-transform: uppercase;
+}
+
+.about-subtitle-modern {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #A6A6A6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Modern Section Styles */
+.section-eyebrow {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #A6A6A6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title-modern {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2E2E2E;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.section-divider {
+  width: 40px;
+  height: 2px;
+  background-color: #F0DADA;
+  margin-bottom: 1.5rem;
+}
+
+.section-text-modern {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Modern Our Story Section */
+.our-story-section-modern {
+  padding: 4rem 0;
+}
+
+.story-content-modern {
+  padding-right: 2rem;
+}
+
+.story-image-modern {
+  position: relative;
+}
+
+.image-container-modern {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+.about-img-modern {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.image-container-modern:hover {
+  transform: translateY(-5px);
+}
+
+/* Modern Values Section */
+.values-section-modern {
+  padding: 4rem 0;
+  background-color: #f8f8f8;
+}
+
+.value-card-modern {
+  padding: 2rem;
+  border-radius: 0.25rem;
+  transition: transform 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  background-color: white;
+}
+
+.value-card-modern:hover {
+  transform: translateY(-5px);
+}
+
+.value-icon-modern {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: #2E2E2E;
+}
+
+.value-title-modern {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2E2E2E;
+  margin-bottom: 1rem;
+}
+
+.value-text-modern {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Team Section */
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.member-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease;
+}
+
+.member-image:hover {
+  transform: scale(1.05);
+}
+
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.member-title {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+/* Modern CTA Section */
+.cta-section-modern {
+  padding: 4rem 0;
+}
+
+.cta-content-modern {
+  background-color: #2E2E2E;
+  padding: 3rem 2rem;
+  border-radius: 0.25rem;
+  color: white;
+  position: relative;
+}
+
+.cta-title-modern {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.cta-text-modern {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #f5f5f5;
+}
+
+.cta-button-modern {
+  display: inline-block;
+  background-color: white;
+  color: #2E2E2E;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.cta-button-modern:hover {
+  background-color: #F0DADA;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-header {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .story-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .member-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+}

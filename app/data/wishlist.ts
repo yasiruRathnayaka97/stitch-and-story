@@ -70,7 +70,7 @@ export const addToWishlist = (userId: string, productId: string): void => {
   // Create a new wishlist if one doesn't exist
   if (!wishlist) {
     const newWishlist: Wishlist = {
-      id: `wishlist-${Date.now()}`,
+      id: `wishlist-${typeof window !== 'undefined' ? Date.now() : Math.floor(Math.random()*1000000)}`,
       userId,
       items: []
     };
@@ -84,7 +84,7 @@ export const addToWishlist = (userId: string, productId: string): void => {
   if (!existingItem) {
     // Add new item if it doesn't exist
     wishlist.items.push({
-      id: `wishlistItem-${Date.now()}`,
+      id: `wishlistItem-${typeof window !== 'undefined' ? Date.now() : Math.floor(Math.random()*1000000)}`,
       productId
     });
   }

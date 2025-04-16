@@ -26,6 +26,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Only run on client-side to prevent hydration errors
     // Check for saved user in localStorage
     const savedUser = localStorage.getItem('user');
     if (savedUser) {

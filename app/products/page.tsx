@@ -4,12 +4,12 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, Product, getProductCategories } from '../../data/products';
-import { useAuth } from '../../hooks/useAuth';
-import { useWishlist } from '../../hooks/useWishlist';
+import { products, Product, getProductCategories } from '../data/products';
+import { useAuth } from '../hooks/useAuth';
+import { useWishlist } from '../hooks/useWishlist';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import './products.css';
+import '../routes/products/products.css';
 
 // Component that uses searchParams - will be wrapped in Suspense
 function ProductsContent() {
@@ -19,13 +19,15 @@ function ProductsContent() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
   const [sortOption, setSortOption] = useState<string>('featured');
   const categories = getProductCategories();
+  
   const { user } = useAuth();
-  const { isItemInWishlist, addItem } = useWishlist();
-
+  const { isItemInWishlist, addItem: addToWishlist } = useWishlist();
+  
+  // Filter and sort products when dependencies change
   useEffect(() => {
     let filtered = [...products];
     
-    // Apply category filter
+    // Apply category filter if selected
     if (selectedCategory) {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }
@@ -39,41 +41,43 @@ function ProductsContent() {
         filtered.sort((a, b) => b.price - a.price);
         break;
       case 'newest':
-        // In a real app, this would sort by date added
-        filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+        filtered.sort((a, b) => {
+          // In a real app, you would compare dates
+          // This is just a placeholder implementation
+          return b.id.localeCompare(a.id);
+        });
         break;
+      case 'featured':
       default:
-        // 'featured' - no specific sorting, use default order
+        // Featured sorting logic would go here
+        // For now, we'll keep the default order
         break;
     }
     
     setFilteredProducts(filtered);
   }, [selectedCategory, sortOption]);
-
-  useEffect(() => {
-    if (categoryParam) {
-      setSelectedCategory(categoryParam);
-    }
-  }, [categoryParam]);
-
+  
+  // Handle category change
   const handleCategoryChange = (category: string | null) => {
     setSelectedCategory(category);
   };
-
+  
+  // Handle sort change
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOption(e.target.value);
   };
-
+  
+  // Handle add to wishlist
   const handleAddToWishlist = (productId: string) => {
     if (!user) {
-      // Redirect to login if not authenticated
-      window.location.href = '/routes/auth';
+      // In a real app, you might redirect to login or show a modal
+      alert('Please log in to add items to your wishlist');
       return;
     }
     
-    addItem(productId);
+    addToWishlist(productId);
   };
-
+  
   return (
     <div className="container mx-auto px-4 products-container-modern">
       <div className="products-header-modern">
@@ -144,7 +148,7 @@ function ProductsContent() {
               {filteredProducts.map((product) => (
                 <div key={product.id} className="product-card-modern">
                   <div className="product-image-wrapper">
-                    <Link href={`/routes/products/${product.id}`}>
+                    <Link href={`/products/${product.id}`}>
                       <Image 
                         src={product.images[0]} 
                         alt={product.name}
@@ -189,7 +193,7 @@ function ProductsContent() {
                         )}
                       </button>
                       <Link 
-                        href={`/routes/products/${product.id}`}
+                        href={`/products/${product.id}`}
                         className="product-quickview" 
                         aria-label="Quick view"
                       >
@@ -202,7 +206,7 @@ function ProductsContent() {
                   </div>
                   
                   <div className="product-info-modern">
-                    <Link href={`/routes/products/${product.id}`} className="product-name-modern">{product.name}</Link>
+                    <Link href={`/products/${product.id}`} className="product-name-modern">{product.name}</Link>
                     <p className="product-description-modern">{product.description}</p>
                     <div className="product-price-modern">${product.price.toFixed(2)}</div>
                   </div>
@@ -226,7 +230,6 @@ function ProductsContent() {
   );
 }
 
-// Main component that wraps the content in Suspense
 export default function ProductsPage() {
   return (
     <Suspense fallback={

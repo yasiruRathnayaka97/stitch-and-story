@@ -30,6 +30,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    // Only run on client-side to prevent hydration errors
     if (user) {
       // Load wishlist items for the authenticated user
       const items = getWishlistItemsWithProducts(user.id);

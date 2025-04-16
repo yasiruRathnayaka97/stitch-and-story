@@ -74,7 +74,7 @@ export const addToCart = (userId: string, productId: string, quantity: number = 
   // Create a new cart if one doesn't exist
   if (!cart) {
     const newCart: Cart = {
-      id: `cart-${Date.now()}`,
+      id: `cart-${typeof window !== 'undefined' ? Date.now() : Math.floor(Math.random()*1000000)}`,
       userId,
       items: []
     };
@@ -91,7 +91,7 @@ export const addToCart = (userId: string, productId: string, quantity: number = 
   } else {
     // Add new item if it doesn't exist
     cart.items.push({
-      id: `cartItem-${Date.now()}`,
+      id: `cartItem-${typeof window !== 'undefined' ? Date.now() : Math.floor(Math.random()*1000000)}`,
       productId,
       quantity
     });

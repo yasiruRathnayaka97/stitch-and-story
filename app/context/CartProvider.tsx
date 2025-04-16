@@ -33,6 +33,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    // Only run on client-side to prevent hydration errors
     if (user) {
       // Load cart items for the authenticated user
       const items = getCartItemsWithProducts(user.id);

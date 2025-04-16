@@ -35,9 +35,9 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: '/routes/products' },
-    { name: 'About', href: '/routes/about' },
-    { name: 'Contact', href: '/routes/contact' },
+    { name: 'Products', href: '/products' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -70,7 +70,7 @@ const Header = () => {
 
           {/* Icons */}
           <div className="flex items-center space-x-4">
-            <Link href="/routes/wishlist" className="relative p-1">
+            <Link href="/wishlist" className="relative p-1">
               <HeartIcon className="h-6 w-6 text-charcoal-black" />
               {wishlistItems?.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-blush-nude text-charcoal-black text-xs rounded-full h-4 w-4 flex items-center justify-center">
@@ -79,7 +79,7 @@ const Header = () => {
               )}
             </Link>
             
-            <Link href="/routes/cart" className="relative p-1">
+            <Link href="/cart" className="relative p-1">
               <ShoppingBagIcon className="h-6 w-6 text-charcoal-black" />
               {cartItems?.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-blush-nude text-charcoal-black text-xs rounded-full h-4 w-4 flex items-center justify-center">
@@ -88,7 +88,7 @@ const Header = () => {
               )}
             </Link>
             
-            <Link href={user ? "/routes/profile" : "/routes/auth"} className="p-1">
+            <Link href={user ? "/profile" : "/auth"} className="p-1">
               <UserIcon className="h-6 w-6 text-charcoal-black" />
             </Link>
 

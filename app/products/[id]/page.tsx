@@ -4,12 +4,11 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, Product } from '../../../data/products';
-import { useAuth } from '../../../hooks/useAuth';
-import { useCart } from '../../../hooks/useCart';
-import { useWishlist } from '../../../hooks/useWishlist';
-import { HeartIcon, ShoppingBagIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { products, Product } from '../../data/products';
+import { useAuth } from '../../hooks/useAuth';
+import { useCart } from '../../hooks/useCart';
+import { useWishlist } from '../../hooks/useWishlist';
+import '../../routes/products/products.css';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -30,10 +29,9 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-        <p className="mb-8">The product you&lsquo;re looking for doesn&lsquo;t exist or has been removed.</p>
-        <Link href="/routes/products" className="btn-primary inline-block px-6 py-2">
+      <div className="container mx-auto px-4 py-8">
+        <p>Product not found</p>
+        <Link href="/products" className="text-blush-nude hover:underline">
           Back to Products
         </Link>
       </div>
@@ -42,7 +40,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     if (!user) {
-      router.push('/routes/auth');
+      router.push('/auth');
       return;
     }
 
@@ -54,7 +52,7 @@ export default function ProductDetailPage() {
 
   const handleAddToWishlist = () => {
     if (!user) {
-      router.push('/routes/auth');
+      router.push('/auth');
       return;
     }
 
@@ -76,12 +74,12 @@ export default function ProductDetailPage() {
           Home
         </Link>
         <span className="mx-2">/</span>
-        <Link href="/routes/products" className="hover:text-blush-nude transition-colors">
+        <Link href="/products" className="hover:text-blush-nude transition-colors">
           Products
         </Link>
         <span className="mx-2">/</span>
         <Link
-          href={`/routes/products?category=${product.category}`}
+          href={`/products?category=${product.category}`}
           className="hover:text-blush-nude transition-colors"
         >
           {product.category}
@@ -94,8 +92,7 @@ export default function ProductDetailPage() {
         onClick={() => router.back()}
         className="flex items-center text-dusty-gray hover:text-charcoal-black transition-colors mb-6"
       >
-        <ArrowLeftIcon className="h-4 w-4 mr-1" />
-        Back
+        ← Back
       </button>
 
       {/* Product Detail */}
@@ -227,7 +224,7 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Product Details */}
-      <div className="border-t border-dusty-gray/20 pt-6">
+      <div className="border-t border-dusty-gray/20 pt-6 mt-12">
         <h2 className="text-xl font-semibold mb-4">Product Details</h2>
         <ul className="space-y-2 text-dusty-gray">
           <li>Premium quality materials</li>
@@ -246,7 +243,7 @@ export default function ProductDetailPage() {
             {relatedProducts.map((relatedProduct) => (
               <div key={relatedProduct.id} className="product-card-modern">
                 <div className="product-image-wrapper">
-                  <Link href={`/routes/products/${relatedProduct.id}`}>
+                  <Link href={`/products/${relatedProduct.id}`}>
                     <Image
                       src={relatedProduct.images[0]}
                       alt={relatedProduct.name}
@@ -286,19 +283,11 @@ export default function ProductDetailPage() {
                       </svg>
                     </button>
                     <Link
-                      href={`/routes/products/${relatedProduct.id}`}
+                      href={`/products/${relatedProduct.id}`}
                       className="product-quickview"
                       aria-label="Quick view"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                       </svg>
@@ -307,7 +296,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 <div className="product-info-modern">
-                  <Link href={`/routes/products/${relatedProduct.id}`} className="product-name-modern">
+                  <Link href={`/products/${relatedProduct.id}`} className="product-name-modern">
                     {relatedProduct.name}
                   </Link>
                   <div className="product-price-modern">${relatedProduct.price.toFixed(2)}</div>
