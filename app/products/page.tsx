@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { products, Product, getProductCategories } from '../data/products';
-import { useAuth } from '../hooks/useAuth';
 import AddToCartButton from '../components/AddToCartButton';
 import './products.css';
 

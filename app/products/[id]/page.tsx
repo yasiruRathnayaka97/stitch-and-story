@@ -5,8 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { products} from '../../data/products';
-import { useAuth } from '../../hooks/useAuth';
-import { useCart } from '../../hooks/useCart';
 import AddToCartButton from '../../components/AddToCartButton';
 import '../products.css';
 import './product-detail.css';

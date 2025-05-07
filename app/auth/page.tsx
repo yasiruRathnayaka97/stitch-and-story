@@ -34,8 +34,8 @@ export default function AuthPage() {
         await signup(email, password, name);
         router.push('/');
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -104,7 +104,7 @@ export default function AuthPage() {
         
         <div className="auth-toggle">
           {isLogin ? (
-            <p>Don't have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button></p>
+            <p>Don&apos;t have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button></p>
           ) : (
             <p>Already have an account? <button onClick={() => setIsLogin(true)}>Sign In</button></p>
           )}
