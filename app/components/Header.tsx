@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { ShoppingBagIcon, HeartIcon, UserIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { UserIcon, Bars3Icon, XMarkIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../hooks/useAuth';
 import { useCart } from '../hooks/useCart';
-import { useWishlist } from '../hooks/useWishlist';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +13,6 @@ const Header = () => {
   const pathname = usePathname();
   const { user } = useAuth();
   const { cartItems } = useCart();
-  const { wishlistItems } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,19 +68,10 @@ const Header = () => {
 
           {/* Icons */}
           <div className="flex items-center space-x-4">
-            <Link href="/wishlist" className="relative p-1">
-              <HeartIcon className="h-6 w-6 text-charcoal-black" />
-              {wishlistItems?.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-blush-nude text-charcoal-black text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  {wishlistItems.length}
-                </span>
-              )}
-            </Link>
-            
-            <Link href="/cart" className="relative p-1">
+            <Link href="/cart" className="p-1 relative">
               <ShoppingBagIcon className="h-6 w-6 text-charcoal-black" />
-              {cartItems?.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-blush-nude text-charcoal-black text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gray-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                   {cartItems.length}
                 </span>
               )}

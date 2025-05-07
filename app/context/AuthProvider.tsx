@@ -1,11 +1,12 @@
 'use client';
 
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { User, authenticate } from '../data/users';
+import { User, authenticate, createUser } from '../data/users';
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
+  signup: (email: string, password: string, name: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -13,6 +14,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   login: async () => false,
+  signup: async () => false,
   logout: () => {},
   isLoading: true,
 });
@@ -57,13 +59,29 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const signup = async (email: string, password: string, name: string): Promise<boolean> => {
+    try {
+      const newUser = createUser(email, password, name);
+      
+      if (newUser) {
+        setUser(newUser);
+        localStorage.setItem('user', JSON.stringify(newUser));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Signup failed:', error);
+      throw error;
+    }
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

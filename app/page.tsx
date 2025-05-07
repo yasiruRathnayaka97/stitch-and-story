@@ -58,8 +58,8 @@ export default function Home() {
       <section className="trending-section">
         <div className="container mx-auto px-4">
           <div className="section-header">
-            <h2 className="section-title-modern">Trending Categories</h2>
-            <Link href="/products" className="section-view-all">View All</Link>
+            <h2 className="section-title-modern gray-section-title">Trending Categories</h2>
+            <Link href="/products" className="section-view-all gray-instagram-link">View All</Link>
           </div>
           
           <div className="categories-grid">
@@ -92,8 +92,8 @@ export default function Home() {
       <section className="featured-products-section">
         <div className="container mx-auto px-4">
           <div className="section-header">
-            <h2 className="section-title-modern">New Arrivals</h2>
-            <Link href="/products" className="section-view-all">View All</Link>
+            <h2 className="section-title-modern gray-section-title">New Arrivals</h2>
+            <Link href="/products" className="section-view-all gray-instagram-link">View All</Link>
           </div>
           
           <div className="products-slider">
@@ -119,19 +119,9 @@ export default function Home() {
                     )}
                   </Link>
                   <div className="product-actions">
-                    <button className="product-wishlist" aria-label="Add to wishlist">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                      </svg>
-                    </button>
-                    <button className="product-quickview" aria-label="Quick view">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        <line x1="11" y1="8" x2="11" y2="14"></line>
-                        <line x1="8" y1="11" x2="14" y2="11"></line>
-                      </svg>
-                    </button>
+                    <Link href={`/products/${product.id}`} className="view-product-btn">
+                      View Product
+                    </Link>
                   </div>
                 </div>
                 <div className="product-info-modern">
@@ -183,8 +173,8 @@ export default function Home() {
       <section className="instagram-section">
         <div className="container mx-auto px-4">
           <div className="section-header">
-            <h2 className="section-title-modern">Style Inspiration</h2>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="instagram-link">
+            <h2 className="section-title-modern gray-section-title">Style Inspiration</h2>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="instagram-link gray-instagram-link">
               @stitchandstory
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="instagram-icon">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -205,16 +195,7 @@ export default function Home() {
                   height={300}
                   className="instagram-image"
                 />
-                <div className="instagram-overlay">
-                  <div className="instagram-actions">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="instagram-action-icon">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="instagram-action-icon">
-                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                  </div>
-                </div>
+                <div className="instagram-overlay"></div>
               </div>
             ))}
           </div>

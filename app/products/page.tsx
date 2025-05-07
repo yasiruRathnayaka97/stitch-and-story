@@ -6,9 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { products, Product, getProductCategories } from '../data/products';
 import { useAuth } from '../hooks/useAuth';
-import { useWishlist } from '../hooks/useWishlist';
-import { HeartIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import AddToCartButton from '../components/AddToCartButton';
 import './products.css';
 
 // Component that uses searchParams - will be wrapped in Suspense
@@ -20,8 +18,7 @@ function ProductsContent() {
   const [sortOption, setSortOption] = useState<string>('featured');
   const categories = getProductCategories();
   
-  const { user } = useAuth();
-  const { isItemInWishlist, addItem: addToWishlist } = useWishlist();
+  
   
   // Filter and sort products when dependencies change
   useEffect(() => {
@@ -67,16 +64,7 @@ function ProductsContent() {
     setSortOption(e.target.value);
   };
   
-  // Handle add to wishlist
-  const handleAddToWishlist = (productId: string) => {
-    if (!user) {
-      // In a real app, you might redirect to login or show a modal
-      alert('Please log in to add items to your wishlist');
-      return;
-    }
-    
-    addToWishlist(productId);
-  };
+
   
   return (
     <div className="container mx-auto px-4 products-container-modern">
@@ -181,34 +169,24 @@ function ProductsContent() {
                     </div>
                     
                     <div className="product-actions">
-                      <button 
-                        onClick={() => handleAddToWishlist(product.id)}
-                        className="product-wishlist" 
-                        aria-label="Add to wishlist"
-                      >
-                        {user && isItemInWishlist(product.id) ? (
-                          <HeartIconSolid className="w-5 h-5 text-blush-nude" />
-                        ) : (
-                          <HeartIcon className="w-5 h-5" />
-                        )}
-                      </button>
-                      <Link 
-                        href={`/products/${product.id}`}
-                        className="product-quickview" 
-                        aria-label="Quick view"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="11" cy="11" r="8"></circle>
-                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                      </Link>
                     </div>
                   </div>
                   
                   <div className="product-info-modern">
                     <Link href={`/products/${product.id}`} className="product-name-modern">{product.name}</Link>
                     <p className="product-description-modern">{product.description}</p>
-                    <div className="product-price-modern">${product.price.toFixed(2)}</div>
+                    <div className="flex justify-between items-center mt-3">
+                      <div className="product-price-modern">${product.price.toFixed(2)}</div>
+                    </div>
+                    <div className="mt-3">
+                      <AddToCartButton
+                        productId={product.id}
+                        size="md"
+                        fullWidth={true}
+                        variant="grey"
+                        className="add-to-cart-btn-product"
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

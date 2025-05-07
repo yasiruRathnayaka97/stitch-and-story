@@ -152,7 +152,7 @@
 /* ASOS-inspired Trending Categories Section */
 .trending-section {
   padding: 5rem 0;
-  background-color: #fff;
+  background-color: #f5f5f5;
 }
 
 .section-header {
@@ -277,7 +277,7 @@
 /* ASOS-inspired Featured Products Section */
 .featured-products-section {
   padding: 5rem 0;
-  background-color: #f8f8f8;
+  background-color: #f5f5f5;
 }
 
 .products-slider {
@@ -349,18 +349,24 @@
 }
 
 .product-wishlist,
-.product-quickview {
-  background-color: white;
+.product-quickview,
+.view-product-btn {
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+.view-product-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .product-wishlist svg,
@@ -507,7 +513,15 @@
 /* ASOS-inspired Instagram Section */
 .instagram-section {
   padding: 5rem 0;
-  background-color: #fff;
+  background-color: #f5f5f5;
+}
+
+.gray-section-title {
+  color: #4B5563 !important;
+}
+
+.gray-instagram-link {
+  color: #6B7280 !important;
 }
 
 .instagram-link {
@@ -528,6 +542,7 @@
 .instagram-icon {
   width: 1.25rem;
   height: 1.25rem;
+  stroke: #4B5563;
 }
 
 .instagram-grid {
@@ -577,6 +592,22 @@
 .instagram-actions {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-details {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.view-details:hover {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .instagram-action-icon {

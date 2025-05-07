@@ -294,24 +294,42 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: white;
-  color: var(--charcoal-black);
-  border: 1px solid var(--dusty-gray);
-  padding: 1.2rem 2rem;
-  font-size: 0.95rem;
+  background-color: transparent;
+  border: 1px solid var(--color-charcoal-black);
+  color: var(--color-charcoal-black);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
   font-weight: 500;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  width: 100%;
 }
 
 .wishlist-btn:hover {
-  background-color: var(--blush-nude);
-  border-color: var(--blush-nude);
-  transform: translateY(-2px);
+  background-color: var(--color-charcoal-black);
+  color: white;
+}
+
+.wishlist-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid var(--color-charcoal-black);
+  color: var(--color-charcoal-black);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.wishlist-btn-container:hover {
+  background-color: var(--color-charcoal-black);
+  color: white;
 }
 
 .wishlist-btn::before {
@@ -333,8 +351,66 @@
 /* Product Meta */
 .product-meta {
   margin-top: 2rem;
-  border-top: 1px solid rgba(166, 166, 166, 0.2);
   padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.product-specs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.spec-item {
+  flex: 1 1 auto;
+  min-width: 120px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-right: 1px solid #e5e7eb;
+}
+
+.spec-item:last-child {
+  border-right: none;
+}
+
+.spec-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #000000;
+  font-weight: 500;
+}
+
+.spec-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.spec-icon {
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.in-stock {
+  color: #10B981;
+}
+
+.low-stock {
+  color: #F59E0B;
+}
+
+.out-of-stock {
+  color: #EF4444;
 }
 
 .meta-item {

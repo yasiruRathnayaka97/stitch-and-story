@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { products} from '../../data/products';
 import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../hooks/useCart';
-import { useWishlist } from '../../hooks/useWishlist';
+import AddToCartButton from '../../components/AddToCartButton';
 import '../products.css';
 import './product-detail.css';
 
@@ -19,9 +19,6 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  const { user } = useAuth();
-  const { addItem: addToCart } = useCart();
-  const { isItemInWishlist, addItem: addToWishlist } = useWishlist();
 
   // Get related products (same category, excluding current product)
   const relatedProducts = products
@@ -39,26 +36,9 @@ export default function ProductDetailPage() {
     );
   }
 
-  const handleAddToCart = () => {
-    if (!user) {
-      router.push('/auth');
-      return;
-    }
 
-    addToCart(product.id, quantity);
 
-    // Show a success message or open cart sidebar in a real implementation
-    alert(`Added ${quantity} ${product.name} to your cart!`);
-  };
 
-  const handleAddToWishlist = () => {
-    if (!user) {
-      router.push('/auth');
-      return;
-    }
-
-    addToWishlist(product.id);
-  };
 
   const handleQuantityChange = (action: 'increase' | 'decrease') => {
     if (action === 'increase') {
@@ -140,6 +120,53 @@ export default function ProductDetailPage() {
         <div className="product-info-container">
           <h1 className="product-detail-title">{product.name}</h1>
           <p className="product-detail-price">${product.price.toFixed(2)}</p>
+          
+          <div className="product-meta">
+            <h3 className="text-lg font-semibold text-black">Product Information</h3>
+            <div className="product-specs">
+              <div className="spec-item">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 spec-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                <div className="spec-content">
+                  <span className="spec-label">Category</span>
+                  <span className="spec-value">{product.category}</span>
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 spec-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <div className="spec-content">
+                  <span className="spec-label">SKU</span>
+                  <span className="spec-value">SS-{product.id}</span>
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 spec-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+                <div className="spec-content">
+                  <span className="spec-label">Availability</span>
+                  <span className={`spec-value ${product.stock > 10 ? 'in-stock' : product.stock > 0 ? 'low-stock' : 'out-of-stock'}`}>
+                    {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="spec-item">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 spec-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+                <div className="spec-content">
+                  <span className="spec-label">Material</span>
+                  <span className="spec-value">{product.material || 'Cotton Blend'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="product-detail-description">
             <p>{product.description}</p>
@@ -173,53 +200,18 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            <button
-              onClick={handleAddToCart}
+            <AddToCartButton
+              productId={product.id}
+              quantity={quantity}
               className="add-to-cart-btn"
+              size="lg"
+              fullWidth={true}
+              variant="grey"
+              text={product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
               disabled={product.stock === 0}
-            >
-              {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-            </button>
+            />
 
-            <button
-              onClick={() => handleAddToWishlist()}
-              className="wishlist-btn"
-              aria-label={`Add ${product.name} to wishlist`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-              {user && isItemInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
-            </button>
-          </div>
 
-          <div className="product-meta">
-            <div className="meta-item">
-              <span className="meta-label">Category:</span>
-              <span className="meta-value">{product.category}</span>
-            </div>
-
-            <div className="meta-item">
-              <span className="meta-label">SKU:</span>
-              <span className="meta-value">SS-{product.id}</span>
-            </div>
-
-            <div className="meta-item">
-              <span className="meta-label">Availability:</span>
-              <span className="meta-value">
-                {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -264,35 +256,6 @@ export default function ProductDetailPage() {
                   </Link>
 
                   <div className="product-actions">
-                    <button
-                      onClick={() => handleAddToWishlist()}
-                      className="product-wishlist" 
-                      aria-label="Add to wishlist"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                      </svg>
-                    </button>
-                    <Link
-                      href={`/products/${relatedProduct.id}`}
-                      className="product-quickview"
-                      aria-label="Quick view"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </Link>
                   </div>
                 </div>
 
@@ -300,7 +263,18 @@ export default function ProductDetailPage() {
                   <Link href={`/products/${relatedProduct.id}`} className="product-name-modern">
                     {relatedProduct.name}
                   </Link>
-                  <div className="product-price-modern">${relatedProduct.price.toFixed(2)}</div>
+                  <div className="flex justify-between items-center mt-3">
+                    <div className="product-price-modern">${relatedProduct.price.toFixed(2)}</div>
+                  </div>
+                  <div className="mt-3">
+                    <AddToCartButton
+                      productId={relatedProduct.id}
+                      size="md"
+                      fullWidth={true}
+                      variant="grey"
+                      className="add-to-cart-btn-product"
+                    />
+                  </div>
                 </div>
               </div>
             ))}

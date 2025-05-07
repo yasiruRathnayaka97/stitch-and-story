@@ -29,6 +29,28 @@ export const authenticate = (email: string, password: string): User | null => {
   return user || null;
 };
 
+// Mock signup function
+export const createUser = (email: string, password: string, name: string): User => {
+  // Check if user already exists
+  const existingUser = users.find(user => user.email === email);
+  if (existingUser) {
+    throw new Error('User with this email already exists');
+  }
+  
+  // Create new user
+  const newUser: User = {
+    id: (users.length + 1).toString(),
+    name,
+    email,
+    password, // In a real app, this would be hashed
+  };
+  
+  // Add to users array (in a real app, this would be saved to a database)
+  users.push(newUser);
+  
+  return newUser;
+};
+
 export const getUserById = (id: string): User | undefined => {
   return users.find(user => user.id === id);
 };
